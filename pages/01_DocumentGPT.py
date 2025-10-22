@@ -112,6 +112,7 @@ with st.sidebar:
         "Upload a .txt .pdf or .docx file",
         type=["pdf", "txt", "docx"],
     )
+    st.markdown("https://github.com/hzhzkim/FULLSTACK-GPT.git")
 
 if not APIKey:
     st.warning("Please enter your OpenAI API Key.")
