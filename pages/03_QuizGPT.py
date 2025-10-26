@@ -66,7 +66,6 @@ quiz_function = {
 
 llm = ChatOpenAI(
     temperature=0.1,
-    model="gpt-3.5-turbo-1106",
     streaming=True,
     callbacks=[StreamingStdOutCallbackHandler()],
 ).bind(
@@ -134,7 +133,7 @@ with st.sidebar:
             docs = wiki_search(topic)
 
     st.markdown("https://github.com/hzhzkim/FULLSTACK-GPT.git")
-    
+
 
 questions_prompt = ChatPromptTemplate.from_messages(
     [
