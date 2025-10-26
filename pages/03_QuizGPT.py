@@ -53,19 +53,6 @@ quiz_function = {
     },
 }
 
-llm = ChatOpenAI(
-    temperature=0.1,
-    streaming=True,
-    callbacks=[StreamingStdOutCallbackHandler()],
-).bind(
-    function_call = {
-        "name": "quiz_function",
-    },
-    functions = [
-        quiz_function,
-    ],
-)
-
 
 def format_docs(docs):
     return "\n\n".join(document.page_content for document in docs)
@@ -126,6 +113,20 @@ with st.sidebar:
 if not APIKey:
     st.warning("Please enter your OpenAI API Key.")
     st.stop()
+
+llm = ChatOpenAI(
+    temperature=0.1,
+    openai_api_key=APIKey,
+    streaming=True,
+    callbacks=[StreamingStdOutCallbackHandler()],
+).bind(
+    function_call = {
+        "name": "quiz_function",
+    },
+    functions = [
+        quiz_function,
+    ],
+)
 
 questions_prompt = ChatPromptTemplate.from_messages(
     [
