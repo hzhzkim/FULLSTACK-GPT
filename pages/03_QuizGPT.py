@@ -6,17 +6,6 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.callbacks import StreamingStdOutCallbackHandler
 import streamlit as st
 from langchain.retrievers import WikipediaRetriever
-from langchain.schema import BaseOutputParser, output_parser
-
-
-class JsonOutputParser(BaseOutputParser):
-    def parse(self, text):
-        text = text.replace("```", "").replace("json", "")
-        return json.loads(text)
-
-
-output_parser = JsonOutputParser()
-
 
 st.set_page_config(
     page_title="QuizGPT",
@@ -134,6 +123,9 @@ with st.sidebar:
 
     st.markdown("https://github.com/hzhzkim/FULLSTACK-GPT.git")
 
+if not APIKey:
+    st.warning("Please enter your OpenAI API Key.")
+    st.stop()
 
 questions_prompt = ChatPromptTemplate.from_messages(
     [
